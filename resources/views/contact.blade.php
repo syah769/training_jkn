@@ -3,75 +3,86 @@
 @section('title', 'Contact Form - Training JKN')
 
 @section('content')
-    <div class="max-w-2xl mx-auto">
-        <!-- Page Header -->
-        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">User Registration Training</h1>
-            <p class="text-gray-600">
-                Contoh form registration untuk training Laravel
-            </p>
-        </div>
-
-        <!-- Success Message -->
-        @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-8">
-                {{ session('success') }}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Page Header -->
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <h1 class="h3 mb-3">User Registration Training</h1>
+                    <p class="text-muted mb-0">
+                        Contoh form registration untuk training Laravel dengan Bootstrap Forms
+                    </p>
+                </div>
             </div>
-        @endif
 
-        <!-- Contact Form -->
-        <div class="bg-white rounded-lg shadow-md p-8">
-            <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
-                @csrf
-
-                <!-- Name Field -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                    </label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                        class="w-full px-4 py-3 border @error('name') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter your full name">
-                    @error('name')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+            <!-- Success Message -->
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    <strong>Success!</strong> {{ session('success') }}
                 </div>
+            @endif
 
-                <!-- Email Field -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                    </label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                        class="w-full px-4 py-3 border @error('email') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter your email address">
-                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+            <!-- Contact Form -->
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
 
-                <!-- Password Field -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                        Password *
-                    </label>
-                    <input type="password" id="password" name="password" required
-                        class="w-full px-4 py-3 border @error('password') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter your password">
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                        <!-- Name Field -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                Full Name *
+                            </label>
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                                class="form-control @error('name') is-invalid @enderror" placeholder="Enter your full name"
+                                aria-describedby="nameHelp">
+                            <div id="nameHelp" class="form-text">Please provide your complete full name.</div>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                <!-- Submit Button -->
-                <div class="pt-4">
-                    <button type="submit"
-                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium">
-                        Submit
-                    </button>
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email Address *
+                            </label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter your email address" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                Password *
+                            </label>
+                            <input type="password" id="password" name="password" required
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Enter your password" aria-describedby="passwordHelp">
+                            <div id="passwordHelp" class="form-text">
+                                Your password must be at least 8 characters long and contain letters and numbers.
+                            </div>
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Register Account
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+
         </div>
-
     </div>
 @endsection

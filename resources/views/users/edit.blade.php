@@ -3,78 +3,77 @@
 @section('title', 'Edit User - Training JKN')
 
 @section('content')
-    <div class="max-w-2xl mx-auto">
-        <!-- Page Header -->
-        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-4">Edit User</h1>
-                    <p class="text-gray-600">
-                        Update user information
-                    </p>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Page Header -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="h3 mb-2">Edit User</h1>
+                            <p class="text-muted mb-0">
+                                Update user information
+                            </p>
+                        </div>
+                        <a href="{{ url('/users') }}" class="btn btn-secondary">Back to List</a>
+                    </div>
                 </div>
-                <a href="{{ url('/users') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">Back to
-                    List</a>
             </div>
-        </div>
 
-        <!-- Edit Form -->
-        <div class="bg-white rounded-lg shadow-md p-8">
-            <form action="{{ route('users.update', $user) }}" method="POST" class="space-y-6">
-                @csrf
-                @method('PUT')
+            <!-- Edit Form -->
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('users.update', $user) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-                <!-- Name Field -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                    </label>
-                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required
-                        class="w-full px-4 py-3 border @error('name') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter full name">
-                    @error('name')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                        <!-- Name Field -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                Full Name *
+                            </label>
+                            <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
+                                required class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Enter full name">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email Address *
+                            </label>
+                            <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
+                                required class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter email address">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                Password (Leave blank to keep current password)
+                            </label>
+                            <input type="password" id="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Enter new password">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ route('users.show', $user) }}" class="btn btn-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update User</button>
+                        </div>
+                    </form>
                 </div>
-
-                <!-- Email Field -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                    </label>
-                    <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required
-                        class="w-full px-4 py-3 border @error('email') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter email address">
-                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Password Field -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                        Password (Leave blank to keep current password)
-                    </label>
-                    <input type="password" id="password" name="password"
-                        class="w-full px-4 py-3 border @error('password') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        placeholder="Enter new password">
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Submit Buttons -->
-                <div class="flex space-x-4 pt-4">
-                    <button type="submit"
-                        class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium">
-                        Update User
-                    </button>
-                    <a href="{{ route('users.show', $user) }}"
-                        class="flex-1 bg-gray-600 text-white py-3 px-6 rounded-lg hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors font-medium text-center">
-                        Cancel
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection
