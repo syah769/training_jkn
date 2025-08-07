@@ -18,6 +18,7 @@
                     <a href="/" class="hover:text-blue-200 transition-colors">Home</a>
                     <a href="/contact" class="hover:text-blue-200 transition-colors">Contact</a>
                     <a href="/users" class="hover:text-blue-200 transition-colors">Users</a>
+                    <a href="/posts" class="hover:text-blue-200 transition-colors">Posts</a>
                 </div>
             </div>
         </div>
